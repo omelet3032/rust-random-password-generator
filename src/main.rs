@@ -20,18 +20,25 @@ fn main() {
 
 fn generate_password(length:usize) -> String {
 
-    let mut rng: ThreadRng = rand::rng();
+    let mut rng = rand::rng(); 
 
-    let vec_char: Vec<char> = (33u8..=126u8).map(|c| c as char).collect();
-
-    // let mut password = String::new();
-    
-    let password: String = (0..length).map(|_| {
-        let idx = rng.random_range(0..vec_char.len());
-        vec_char[idx]
-    }).collect();
+    let password: String = (0..length).map(|_| rng.random_range(33u8..=126u8) as char).collect();
 
     password
+    
+    
+    // ----------------------
+
+    // let mut rng: ThreadRng = rand::rng();
+
+    // let vec_char: Vec<char> = (33u8..=126u8).map(|c| c as char).collect();
+
+    // let password: String = (0..length).map(|_| {
+    //     let idx = rng.random_range(0..vec_char.len());
+    //     vec_char[idx]
+    // }).collect();
+
+    // password
 
 
     // for _ in 0..16 {

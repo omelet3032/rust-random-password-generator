@@ -1,4 +1,5 @@
 use rand::prelude::*;
+use rand::distr::Uniform;
 
 fn main() {
 
@@ -6,7 +7,6 @@ fn main() {
 
     let char_range = 33u8 as char..=126u8 as char;
     let mut vec_char: Vec<char> = Vec::new();
-    let password = String::new();
 
     for i in char_range {
         vec_char.push(i);
@@ -22,7 +22,8 @@ fn generate_password(length:usize) -> String {
 
     let mut rng = rand::rng(); 
 
-    let password: String = (0..length).map(|_| rng.random_range(33u8..=126u8) as char).collect();
+    let dist = Uniform::new_inclusive(33u8, 126u8).unwrap();
+    let password: String = (0..length).map(|_| rng.sample(dist) as char).collect();
 
     password
     

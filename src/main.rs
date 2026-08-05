@@ -3,15 +3,6 @@ use rand::distr::Uniform;
 
 fn main() {
 
-    // let password: String = (0..16).map(|_| rng.random_range(33u8..=126u8) as char).collect();
-
-    let char_range = 33u8 as char..=126u8 as char;
-    let mut vec_char: Vec<char> = Vec::new();
-
-    for i in char_range {
-        vec_char.push(i);
-    }
-
     let length: usize = 16;
     
     let result = generate_password(length);
@@ -24,27 +15,28 @@ fn generate_password(length:usize) -> String {
 
     let dist = Uniform::new_inclusive(33u8, 126u8).unwrap();
     let password: String = (0..length).map(|_| rng.sample(dist) as char).collect();
+    // let password: String = (0..length).map(|_| rng.random_range((33u8..=126u8)) as char).collect();
 
     password
-    
-    
-    // ----------------------
-
-    // let mut rng: ThreadRng = rand::rng();
-
-    // let vec_char: Vec<char> = (33u8..=126u8).map(|c| c as char).collect();
-
-    // let password: String = (0..length).map(|_| {
-    //     let idx = rng.random_range(0..vec_char.len());
-    //     vec_char[idx]
-    // }).collect();
-
-    // password
-
-
-    // for _ in 0..16 {
-    //     let idx = rng.random_range(0..vec_char.len());
-    //     password.push(vec_char[idx]);
-    // }
 
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn returns_empty_string_when_length_is_zero() {
+
+        let length: usize = 0;
+
+        let result = generate_password(length);
+        
+        assert_eq!(result, "");
+
+    }
+
+    
+    
+}
+

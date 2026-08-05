@@ -21,6 +21,15 @@ fn generate_password(length:usize) -> String {
 
 }
 
+fn generate_password_include_number_8(length:usize) {
+    
+    let mut rng = rand::rng();
+    let dist = Uniform::new_inclusive(33u8, 126u8).unwrap();
+    
+}
+
+
+
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -18,17 +18,20 @@ fn generate_password(length:usize) -> String {
     // let password: String = (0..length).map(|_| rng.random_range((33u8..=126u8)) as char).collect();
 
     password
-
 }
 
-fn generate_password_include_number_8(length:usize) {
+// 
+fn generate_password_only_number(length:usize) -> String {
     
     let mut rng = rand::rng();
-    let dist = Uniform::new_inclusive(33u8, 126u8).unwrap();
-    
+    // let dist = Uniform::new_inclusive(48u8, 57u8).unwrap();
+    let dist = Uniform::new_inclusive(b'0', b'9').unwrap();
+
+    let password:String = (0..length).map(|_| rng.sample(dist) as char).collect();
+
+    password
+
 }
-
-
 
 #[cfg(test)]
 mod tests {
@@ -42,6 +45,18 @@ mod tests {
         let result = generate_password(length);
         
         assert_eq!(result, "");
+
+    }
+
+    #[test]
+    fn return_only_number() {
+        let length: usize = 8;
+
+        let result = generate_password_only_number(length);
+
+        println!("result : {}", result);
+
+
 
     }
 
